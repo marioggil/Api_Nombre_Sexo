@@ -41,7 +41,7 @@ and sample output:
 ## Example of use in curl
 
 ```
-curl -d '[{"Name": "andRea erik"},{"Name": "erik"} ]' -H "Content-Type: application/json"      -X POST http://35.225.223.196:5000/predict &&     echo -e "\n -> predict OK"
+curl -d '[{"Name": "andrea erika"},{"Name": "erik"} ]' -H "Content-Type: application/json"      -X POST http://35.225.223.196:5000/predict &&     echo -e "\n -> predict OK"
 ```
 
 
