@@ -1,13 +1,13 @@
 # Flask API for scikit learn
-A simple Flask application that can serve predictions from a scikit-learn model. Reads a pickled sklearn model into memory when the Flask app is started and returns predictions through the /predict endpoint. You can also use the /train endpoint to train/retrain the model. Any sklearn model can be used for prediction.
+A Flask application that can serve predictions from a scikit-learn model.
+Reads a pickled sklearn model into memory when the Flask app is started and returns predictions through the /predict endpoint. 
+Any sklearn model can be used for prediction.
 
-Read more in [this blog post](https://medium.com/@amirziai/a-flask-api-for-serving-scikit-learn-models-c8bcdaa41daa).
-
-### Dependencies
-- scikit-learn
-- Flask
-- pandas
-- numpy
+## Dependencies
+- Flask==1.0.2
+- numpy==1.16.3
+- pandas==0.24.2
+- scikit-learn==0.20.3
 
 ```
 pip install -r requirements.txt
@@ -23,21 +23,25 @@ python main.py <port>
 Returns an array of predictions given a JSON object representing independent variables. Here's a sample input:
 ```
 [
-    {"Age": 85, "Sex": "male", "Embarked": "S"},
-    {"Age": 24, "Sex": "female", "Embarked": "C"},
-    {"Age": 3, "Sex": "male", "Embarked": "C"},
-    {"Age": 21, "Sex": "male", "Embarked": "S"}
+{"Name": "andrea erika"},
+{"Name": "erik"} 
 ]
+
 ```
 
 and sample output:
 ```
-{"prediction": [0, 1, 1, 0]}
+{
+  "prediction": [
+    "female", 
+    "male"
+  ]
+}
+```
+## Example of use in curl
+
+```
+curl -d '[{"Name": "andRea erik"},{"Name": "erik"} ]' -H "Content-Type: application/json"      -X POST http://35.225.223.196:5000/predict &&     echo -e "\n -> predict OK"
 ```
 
 
-### /train (GET)
-Trains the model. This is currently hard-coded to be a random forest model that is run on a subset of columns of the titanic dataset.
-
-### /wipe (GET)
-Removes the trained model.
